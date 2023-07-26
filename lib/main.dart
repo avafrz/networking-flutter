@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutternetworking/screens/load_screen.dart';
+import 'package:flutternetworking/screens/home_screen.dart';
+import 'package:flutternetworking/screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,11 +16,14 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 8, 79, 161)),
+            ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: LoadScreen(),
       debugShowCheckedModeBanner: false,
+      routes: {
+       '/':(ctx) => LoginScreen(),
+        HomeScreen.routeName : (ctx) => const HomeScreen(),
+      },
     );
   }
 }

@@ -3,14 +3,15 @@ import '../widgets/listtile_widget.dart';
 import '../model/product.dart';
 import '../service/api_handler.dart';
 
-class LoadScreen extends StatefulWidget {
-  const LoadScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  static const routeName = '/home_screen';
+  const HomeScreen({super.key});
 
   @override
-  State<LoadScreen> createState() => _LoadScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _LoadScreenState extends State<LoadScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Product>> futureProducts;
 
   @override
