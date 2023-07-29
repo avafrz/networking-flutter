@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutternetworking/model/favourite.dart';
+import 'package:flutternetworking/screens/favourites_screen.dart';
+import 'package:provider/provider.dart';
 import '../widgets/listtile_widget.dart';
 import '../model/product.dart';
 import '../service/api_handler.dart';
@@ -26,23 +29,40 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Products'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(FavoritesScreen.routeName);
+            },
+            child: const Text(
+              'Favotites',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
       ),
       body: Center(
         child: FutureBuilder<List<Product>>(
           future: futureProducts,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return ListTileWidget(
-                    snapshot.data![index].title,
-                    snapshot.data![index].image,
-                    snapshot.data![index].price,
-                    snapshot.data![index].category,
-                    snapshot.data![index].rating.rate,
+              return Consumer<Favorites>(
+                builder: (context, favorites, child) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return ListTileWidget(
+                          snapshot.data![index].title,
+                          snapshot.data![index].image,
+                          snapshot.data![index].price,
+                          snapshot.data![index].category,
+                          snapshot.data![index].rating.rate,
+                          favorites);
+                    },
+                    itemCount: snapshot.data!.length,
                   );
                 },
-                itemCount: snapshot.data!.length,
               );
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
