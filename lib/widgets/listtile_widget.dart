@@ -60,7 +60,7 @@ class ListTileWidget extends StatelessWidget {
                           fontSize: 15,
                         ),
                         softWrap: false,
-                        overflow: TextOverflow.visible,
+                        overflow: TextOverflow.fade,
                       ),
                     ),
                   ],
@@ -77,11 +77,15 @@ class ListTileWidget extends StatelessWidget {
                     const SizedBox(
                       width: 45,
                     ),
-                    Text(
-                      category,
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 75, 75, 75),
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        category,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 75, 75, 75),
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
                       ),
                     ),
                   ],
@@ -113,8 +117,11 @@ class ListTileWidget extends StatelessWidget {
               }
             },
             icon: favorites.favouritesList.contains(title)
-                ? const Icon(Icons.check)
-                : const Icon(Icons.add),
+                ? const Icon(
+                    Icons.favorite_sharp,
+                    color: Colors.red,
+                  )
+                : const Icon(Icons.favorite_outline_rounded),
           ),
         ),
       ),
